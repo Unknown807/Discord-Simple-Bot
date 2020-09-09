@@ -35,6 +35,26 @@ client.on("message", async msg => {
         case "avatar":
             msg.reply(msg.author.displayAvatarURL());
             break;
+        case "kick":
+            let mentioned_user = msg.mentions.users.first();
+            if (mentioned_user) {
+                let member = msg.guild.member(mentioned_user);
+                if (member) {
+                    member
+                    .kick("Reason: Being Bad")
+                    .then(() => {
+                        msg.reply(`Successfully kicked ${mentioned_user.tag}`);
+                    })
+                    .catch(err => {
+                        msg.reply("Unable to kick the member");
+                        console.error(err);
+                    })
+                } else {
+                    msg.reply("That user isn't in this guild!");
+                }
+            } else {
+                msg.reply("You didn't mention the user to kick!")
+            }
     }
 });
 
