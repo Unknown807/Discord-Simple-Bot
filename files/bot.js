@@ -81,7 +81,7 @@ client.on("message", async msg => {
         return undefined;
     }
 
-	let command = msg.content.toLowerCase().split(" ")[0];
+    let command = msg.content.toLowerCase().split(" ")[0];
     command = command.slice(PREFIX.length);
 
     switch (command) {
@@ -124,13 +124,21 @@ client.on("message", async msg => {
                     console.error(err);
                 });
             break;
-        case "embed":
-            let embed = new MessageEmbed()
-                .setTitle("Embed Title")
-                .setColor(0xff0000)
-                .setDescription("Embed Description Here...");
-            msg.channel.send(embed);
+        case "help":
+            let helpdesc = "\nUsable Commands ->" +
+                "\n   !avatar -> displays your pfp" +
+                "\n   !mylevel -> displays your current level" +
+                "\n   !kick <mention> -> kicks a user from the server" +
+                "\n   !ban <mention> -> bans a user from the server";
+            msg.reply(helpdesc);
             break;
+        // case "embed":
+        //     let embed = new MessageEmbed()
+        //         .setTitle("Embed Title")
+        //         .setColor(0xff0000)
+        //         .setDescription("Embed Description Here...");
+        //     msg.channel.send(embed);
+        //     break;
     }
 });
 
